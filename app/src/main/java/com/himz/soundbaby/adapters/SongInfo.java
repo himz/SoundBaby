@@ -1,4 +1,4 @@
-package com.himz.soundbaby;
+package com.himz.soundbaby.adapters;
 
 import android.content.res.AssetFileDescriptor;
 

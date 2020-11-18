@@ -1,4 +1,4 @@
-package com.himz.soundbaby;
+package com.himz.soundbaby.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.himz.soundbaby.R;
 
 import java.util.ArrayList;
 

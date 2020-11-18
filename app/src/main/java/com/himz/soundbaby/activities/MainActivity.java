@@ -1,4 +1,4 @@
-package com.himz.soundbaby;
+package com.himz.soundbaby.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -10,6 +10,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +24,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.Toast;
+
+import com.himz.soundbaby.R;
+import com.himz.soundbaby.adapters.SongAdapter;
+import com.himz.soundbaby.adapters.SongInfo;
 
 import java.util.ArrayList;
 
@@ -34,14 +38,20 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SeekBar seekBar;
     SongAdapter songAdapter;
+
+    // Change this to use sound pool, to avoid loop gap
+    // https://medium.com/sketchware/difference-between-soundpool-and-mediaplayer-bb79cda8bafc
+    //https://examples.javacodegeeks.com/android/android-soundpool-example/
     MediaPlayer mediaPlayer;
     private Handler myHandler = new Handler();;
     private int lastPlayedPosition = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         //seekBar = (SeekBar) findViewById(R.id.seekBar);
         songAdapter = new SongAdapter(this,_songs);
@@ -63,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     mediaPlayer = null;
                     b.setText("Play");
-                }else {
+                } else {
                     // TODO Stop other songs
                     if(mediaPlayer!= null) {
                         mediaPlayer.stop();
@@ -120,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         Thread t = new runThread();
         //t.start();
     }
+
     // Functionality for the seek bar - not needed.
     public class runThread extends Thread {
 
