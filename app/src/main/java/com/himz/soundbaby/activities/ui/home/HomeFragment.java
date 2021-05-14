@@ -148,6 +148,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void checkUserPermission(){
+        requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WAKE_LOCK},124);
         if(Build.VERSION.SDK_INT>=23){
             if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED){
@@ -174,6 +175,18 @@ public class HomeFragment extends Fragment {
 
         }
 
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if(mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+            mediaPlayer.release();
+        }
     }
     /**
      * Generic method to load all mp3 songs on the device. We need to restrict it to only from

@@ -6,6 +6,14 @@ import androidx.lifecycle.ViewModel;
 
 public class MonitorViewModel extends ViewModel {
 
+    public void setmText(MutableLiveData<String> mText) {
+        this.mText = mText;
+    }
+
+    public void setmText(String mText) {
+        this.mText.setValue(mText);
+    }
+
     private MutableLiveData<String> mText;
 
     public MonitorViewModel() {
